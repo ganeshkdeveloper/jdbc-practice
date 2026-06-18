@@ -82,3 +82,31 @@
 //         }
 //     }
 // }
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/schooldb",
+                "root",
+                "root123"
+            );
+
+            Statement st = con.createStatement();
+
+            int rows = st.executeUpdate(
+                "DELETE FROM students WHERE id=101"
+            );
+
+            System.out.println(rows + " row deleted");
+
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
